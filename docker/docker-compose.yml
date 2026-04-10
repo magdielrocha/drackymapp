@@ -11,7 +11,12 @@ services:
     restart: unless-stopped
     networks:
       - payment-network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
 networks:
   payment-network:
     driver: bridge
+
+volumes:
+  pgdata:
