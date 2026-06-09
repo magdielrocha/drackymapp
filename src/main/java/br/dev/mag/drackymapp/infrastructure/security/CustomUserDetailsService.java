@@ -1,6 +1,5 @@
-package br.dev.mag.drackymapp.services;
+package br.dev.mag.drackymapp.infrastructure.security;
 
-import br.dev.mag.drackymapp.infrastructure.security.CustomUserDetails;
 import br.dev.mag.drackymapp.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
