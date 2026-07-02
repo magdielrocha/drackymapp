@@ -1,7 +1,7 @@
 package br.dev.mag.drackymapp.domain.model;
 
 import br.dev.mag.drackymapp.domain.enums.AuthProvider;
-import br.dev.mag.drackymapp.domain.enums.UserRole;
+import br.dev.mag.drackymapp.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -34,10 +34,10 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserRole role;
+    private Role role;
 
 
-    public static User createLocalUser(String email, String encryptedPassword, UserRole role) {
+    public static User createLocalUser(String email, String encryptedPassword, Role role) {
         if (email == null || email.isBlank()) throw new IllegalArgumentException("Email é obrigatório.");
         if (encryptedPassword == null || encryptedPassword.isBlank()) throw new IllegalArgumentException("Senha é obrigatória.");
 
@@ -45,7 +45,7 @@ public class User {
         user.email = email;
         user.password = encryptedPassword;
         user.provider = AuthProvider.LOCAL;
-        user.role = role != null ? role : UserRole.USER;
+        user.role = role != null ? role : Role.USER;
         return user;
     }
 
@@ -57,7 +57,7 @@ public class User {
         user.email = email;
         user.provider = provider;
         user.providerId = providerId;
-        user.role = UserRole.USER;
+        user.role = Role.USER;
         return user;
     }
 
