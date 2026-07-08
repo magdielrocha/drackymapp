@@ -1,5 +1,6 @@
 package br.dev.mag.drackymapp.infrastructure.security;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,6 +33,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**", "/h2-console/**", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated()
                 )
+
+                .exceptionHandling(exception ->
+                        exception.authenticationEntryPoint((request, response, authException) ->
+                                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED)))
+
                 // Necessário para o console do banco de dados H2 funcionar corretamente no navegador
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
 
